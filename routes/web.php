@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/discount', function () {
+    return view('discount');
 });
 
 Route::get('/login', function () {
@@ -27,4 +27,14 @@ Route::post('/login', function (Illuminate\Http\Request $request) {
         return view('welcome_admin');
     }
     return view('login_error');
+});
+
+
+Route::post('/discount', function (\Illuminate\Http\Request $request) {
+$productDescription = $request->description;
+$listPrice = $request->price;
+$discountPercent = $request->percent;
+$discountAmount = $listPrice * $discountPercent * 0.01;
+$discountPrice = $listPrice * $discountAmount;
+    return view('show', compact('productDescription', 'listPrice', 'discountPercent', 'discountAmount', 'discountPrice'));
 });
