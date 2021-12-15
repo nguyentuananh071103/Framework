@@ -31,10 +31,42 @@ Route::post('/login', function (Illuminate\Http\Request $request) {
 
 
 Route::post('/discount', function (\Illuminate\Http\Request $request) {
-$productDescription = $request->description;
-$listPrice = $request->price;
-$discountPercent = $request->percent;
-$discountAmount = $listPrice * $discountPercent * 0.01;
-$discountPrice = $listPrice * $discountAmount;
+    $productDescription = $request->description;
+    $listPrice = $request->price;
+    $discountPercent = $request->percent;
+    $discountAmount = $listPrice * $discountPercent * 0.01;
+    $discountPrice = $listPrice * $discountAmount;
     return view('show', compact('productDescription', 'listPrice', 'discountPercent', 'discountAmount', 'discountPrice'));
 });
+
+Route::get('/dictionary', function () {
+    return view('dictionary');
+});
+
+Route::post('/dictionary', function (\Illuminate\Http\Request $request) {
+    switch ($request->name) {
+        case "dog":
+            echo "chó";
+            break;
+        case "cat":
+            echo "mèo";
+            break;
+        case "chicken":
+            echo "gà";
+            break;
+        case "pig":
+            echo "lợn";
+            break;
+        case "people":
+            echo "người";
+            break;
+        default:
+            echo "Từ này chưa có trong từ điển";
+            break;
+    }
+
+});
+
+
+
+
